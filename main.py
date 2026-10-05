@@ -11,7 +11,7 @@ import argparse
 from pathlib import Path
 
 from predict import predict_image
-from test import run_test_evaluation, DEFAULT_CKPT
+from evaluate import run_evaluation, DEFAULT_CKPT
 from train import train_model
 
 
@@ -25,7 +25,7 @@ def main():
     args = parser.parse_args()
 
     if args.test:
-        run_test_evaluation(Path(args.checkpoint))
+        run_evaluation(Path(args.checkpoint))
     elif args.train:
         train_model(epochs=args.epochs, save_dir="results/new_run")
     else:

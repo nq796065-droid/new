@@ -21,7 +21,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
         pass
 
 from data import CLASS_NAMES, CLASS_FULL_NAMES, get_transforms
-from model import get_model
+from models.resnet import get_model
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")

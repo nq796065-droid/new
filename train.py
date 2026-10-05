@@ -13,7 +13,8 @@ import torch.nn as nn
 from sklearn.metrics import f1_score
 
 from data import get_dataloaders
-from model import get_model, FocalLoss
+from models.resnet import get_model
+from losses import FocalLoss
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
