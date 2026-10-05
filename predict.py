@@ -93,8 +93,10 @@ if __name__ == "__main__":
     if args.image:
         target = Path(args.image)
     else:
-        samples = list(Path("data/images").glob("*.jpg"))
-        target = random.choice(samples) if samples else Path("data/sample.jpg")
+        samples = list(Path("sample_images").glob("*.jpg"))
+        if not samples:
+            samples = list(Path("data/images").glob("*.jpg"))
+        target = random.choice(samples) if samples else Path("sample.jpg")
         print(f"[*] Tu dong chon ngau nhien anh mau: {target.name}")
 
     predict_image(target, Path(args.checkpoint))

@@ -67,11 +67,8 @@ All input images are converted to RGB, resized to $224 \times 224$ pixels, and n
 ---
 
 ## 5. Script to Reproduce Data
-To download the dataset automatically and prepare the leakage-free splits:
+To prepare and verify the leakage-free splits:
 ```bash
-# 1. Download official Kaggle mirror via kagglehub or huggingface
-python download_dataset.py
-
-# 2. Generate and verify leakage-free splits
-python -c "from data import prepare_data_splits; from pathlib import Path; prepare_data_splits(Path('data/HAM10000_metadata.csv'), Path('data/splits.csv'))"
+# Generate and verify leakage-free StratifiedGroupKFold splits
+python -c "from data import get_dataloaders; get_dataloaders()"
 ```

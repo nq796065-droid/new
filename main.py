@@ -32,9 +32,11 @@ def main():
         if args.image:
             img_path = Path(args.image)
         else:
-            samples = list(Path("data/images").glob("*.jpg"))
+            samples = list(Path("sample_images").glob("*.jpg"))
             if not samples:
-                print("[!] Khong tim thay anh trong data/images.")
+                samples = list(Path("data/images").glob("*.jpg"))
+            if not samples:
+                print("[!] Khong tim thay anh mau de du doan.")
                 return
             import random
             img_path = random.choice(samples)
