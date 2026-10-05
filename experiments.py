@@ -29,7 +29,9 @@ def summarize_benchmark(results_dir: str = "results"):
     print("=" * 70)
 
     for cfg in CONFIGS:
-        ckpt = r_path / cfg["name"] / "best_model.pth"
+        ckpt = r_path / f"{cfg['name']}_model.pth"
+        if not ckpt.exists():
+            ckpt = r_path / cfg["name"] / f"{cfg['name']}_model.pth"
         if ckpt.exists():
             print(f"[*] Danh gia cau hinh: {cfg['desc']}...")
             metrics = run_evaluation(ckpt, save_cm=False)
