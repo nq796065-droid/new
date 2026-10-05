@@ -23,12 +23,23 @@ from models.resnet import get_model
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-DEFAULT_CKPT = Path("results/weighted_sampling/best_model.pth")
+DEFAULT_CKPT = Path("results/weighted_sampling_model.pth")
 if not DEFAULT_CKPT.exists():
-    DEFAULT_CKPT = Path("results/baseline/best_model.pth")
+    DEFAULT_CKPT = Path("results/weighted_sampling/best_model.pth")
+
+
+def resolve_checkpoint(name_or_path: str) -> Path:
+    p = Path(name_or_path)
+    if p.exists():
+        return p
+    for candidate in [Path(f"results/{name_or_path}_model.pth"), Path(f"results/{name_or_path}/best_model.pth"), Path(f"results/{name_or_path}.pth")]:
+        if candidate.exists():
+            return candidate
+    return DEFAULT_CKPT
 
 
 def run_evaluation(checkpoint_path: Path = DEFAULT_CKPT, save_cm: bool = True):
+    checkpoint_path = resolve_checkpoint(str(checkpoint_path))
     print("\n" + "=" * 74)
     print("      OFFICIAL BENCHMARK TEST SET EVALUATION (HAM10000)")
     print("=" * 74)
